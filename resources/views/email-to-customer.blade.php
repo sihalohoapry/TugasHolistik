@@ -1,0 +1,1 @@
+<p>{!! $dataEmail['body'] !!} </p>
