@@ -41,20 +41,6 @@ Route::get('/upload-data', [App\Http\Controllers\UploadDataController::class, 'u
 Route::get('/email', [App\Http\Controllers\EmailController::class, 'email'])->name('email')->middleware(['auth']);
 Route::post('sent-all', [App\Http\Controllers\EmailController::class, 'sentAll'])->name('sent-all')->middleware(['auth']);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Route::post('add-transaction', [App\Http\Controllers\UploadDataController::class, 'addTransaction'])->name('add-transaction')->middleware(['auth']);
+Route::post('/delete-transaction', [App\Http\Controllers\UploadDataController::class, 'delete'])->name('delete-transaction');
 

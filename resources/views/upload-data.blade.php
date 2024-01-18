@@ -88,13 +88,13 @@ Upload Data
                                   </div>
                                   <div class="modal-body">
             
-                                        <form action="{{ route('add-user') }}" method="POST" enctype="multipart/form-data">
+                                        <form action="{{ route('add-transaction') }}" method="POST" enctype="multipart/form-data">
                                             @csrf
                                             
                                             <div class="form-group custom-file col-md-12 mb-2">
                                                 <input type="file" name="file"
                                                 class="form-control" required
-                                                accept="application/vnd.ms-excel"
+                                                accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
                                                 placeholder="File">
                                                 <p><span style="color: red">*</span><i>extention harus xlsx</i></p>
                                                             
@@ -165,7 +165,7 @@ Upload Data
                             </div>
                             <div class="modal-body">
 
-                                <form action="{{ route('delete-user') }}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('delete-transaction') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <input type="hidden" id="idData" name="idData">
                                 <p>Anda yakin menghapus data ini?</p>
@@ -214,9 +214,11 @@ Upload Data
                                             <table id="datatable" class="table table-theme table-row v-middle" >
                                                 <thead>
                                                     <tr>
-                                                        <th><span class="text-muted">Nama</span></th>
-                                                        <th><span class="text-muted">Email</span></th>
-                                                        <th><span class="text-muted">Created Date</span></th>
+                                                        <th><span class="text-muted">Nama Barang</span></th>
+                                                        <th><span class="text-muted">Tgl Transaksi</span></th>
+                                                        <th><span class="text-muted">QTY</span></th>
+                                                        <th><span class="text-muted">Tipe Transaksi</span></th>
+                                                        <th><span class="text-muted">Total Bayar</span></th>
                                                         <th><span class="text-muted">Aksi</span></th>
                                                         
                                                     </tr>
@@ -253,15 +255,6 @@ Upload Data
         document.getElementById('idData').value = id;
 
     }
-
-    function setParameterEdit(id, name, email){
-        document.getElementById('id').value = id;
-        document.getElementById('email_edit').value = email;
-        document.getElementById('name_edit').value = name;
-        
-
-
-    }
     var datatable = $('#datatable').DataTable({
             processing: true,
             serverSide:true,
@@ -270,9 +263,12 @@ Upload Data
                 url: '{!! url()->current() !!}',
             },
             columns:[
-                {data:'name', name: 'name'},
-                {data:'email', name: 'email'},
-                {data:'created_at', name: 'created_at'},
+                {data:'name_product', name: 'name_product'},
+                {data:'transaction_date', name: 'transaction_date'},
+                {data:'qty', name: 'qty'},
+                {data:'tipe_trancation', name: 'tipe_trancation'},
+                {data:'netto', name: 'netto'},
+
                 {
                     data: 'action',
                     name: 'action',

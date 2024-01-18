@@ -50,7 +50,6 @@
         <script src="{{ asset('template/js/app.min.js') }}"></script>
         <script src="{{ asset('template/libs/apexcharts/dist/apexcharts.min.js') }}"></script>
         <script src="{{ asset('template/libs/simplebar/dist/simplebar.js') }}"></script>
-        <script src="{{ asset('template/js/dashboard.js') }}"></script>
          <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.12.1/datatables.min.js"></script>
              @stack('prepend-script')
 
