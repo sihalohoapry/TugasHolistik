@@ -53,7 +53,10 @@ class TemplateEmailController extends Controller
             ->make();
         }
         
-        return view('template-email');
+        $count = TemplateEmails::all()->count();
+        return view('template-email',[
+            'count' => $count,
+        ]);
     }
 
     public function addAttachment(Request $request){
@@ -76,7 +79,7 @@ class TemplateEmailController extends Controller
         }
         $data['name_attachment'] = $naming;
         $data['body'] = $request->body;
-        $data['category'] = $request->category;
+        $data['subject'] = $request->subject;
         $data['user_id'] = Auth::user()->id;
         TemplateEmails::create($data);
         return redirect()->route('template-email')->with('status', 'Data acara berhasil ditambah');

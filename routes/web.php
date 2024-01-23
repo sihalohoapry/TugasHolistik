@@ -27,6 +27,7 @@ Route::get('/user', [App\Http\Controllers\UserController::class, 'user'])->name(
 
 Route::post('/user/add-user', [App\Http\Controllers\UserController::class, 'postUser'])->name('add-user')->middleware(['auth']);
 
+
 Route::get('/user/detail-user', [App\Http\Controllers\UserController::class, 'detailUser'])->name('detail-user')->middleware(['auth']);
 Route::post('/user/delete-user', [App\Http\Controllers\UserController::class, 'deleteUser'])->name('delete-user');
 Route::post('/user/edit-user', [App\Http\Controllers\UserController::class, 'editUser'])->name('edit-user');
@@ -40,7 +41,16 @@ Route::put('/update-template/{id}', [App\Http\Controllers\TemplateEmailControlle
 Route::get('/upload-data', [App\Http\Controllers\UploadDataController::class, 'uploadData'])->name('upload-data')->middleware(['auth']);
 Route::get('/email', [App\Http\Controllers\EmailController::class, 'email'])->name('email')->middleware(['auth']);
 Route::post('sent-all', [App\Http\Controllers\EmailController::class, 'sentAll'])->name('sent-all')->middleware(['auth']);
+Route::post('sent-email', [App\Http\Controllers\EmailController::class, 'sentEmail'])->name('sent-email')->middleware(['auth']);
+
+
 
 Route::post('add-transaction', [App\Http\Controllers\UploadDataController::class, 'addTransaction'])->name('add-transaction')->middleware(['auth']);
 Route::post('/delete-transaction', [App\Http\Controllers\UploadDataController::class, 'delete'])->name('delete-transaction');
+Route::post('/add-data', [App\Http\Controllers\UploadDataController::class, 'postData'])->name('add-data')->middleware(['auth']);
+Route::get('/edit-data/{id}', [App\Http\Controllers\UploadDataController::class, 'editData'])->name('edit-data');
+Route::put('/update-data/{id}', [App\Http\Controllers\UploadDataController::class, 'updateData'])->name('update-data');
+
+
+
 

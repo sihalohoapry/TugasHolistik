@@ -47,14 +47,10 @@
                                                 @method('PUT')
                                                 <div class="form-row">
                                                     <div class="form-group col-md-12 mb-2">
-                                                        <label class="text-muted">Kategory Email</label>
-                                                        <select style="padding: 5px; width: 100%;" name="category">
-                                                            <option value="{{ $data->category }}">{{ $data->category }}</option>
-                                                            <option value="Penting">Penting</option>
-                                                            <option value="Internal">Internal</option>
-                                                            <option value="External">External</option>
+                                                        <label for="exampleInputtext1" class="form-label">Subject Email</label>
+                                                        <input id="subject"  type="text" class="form-control" value="{{ $data->subject }}" name="subject">
 
-                                                        </select>
+                                                </div>
                                                     </div>
                                                     <div class="form-group col-md-12 mb-2">
                                                         <textarea type="text" rows="5" class="form-control" name="body" placeholder="Silahkan Masukkan Deskripsi" required> {{ $data->body }}</textarea>

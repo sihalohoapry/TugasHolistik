@@ -14,6 +14,7 @@ class DataTransactions extends Model
     protected $fillable = [
         'customer',
         'email',
+        'domisili',
         'phone',
         'customer_since',
         'brand',
@@ -31,7 +32,9 @@ class DataTransactions extends Model
         'name_store',
         'disc',
         'netto',
-        'tipe_trancation'
+        'tipe_trancation',
+        'emailed_date',
+        'isEmailed',
 
 
     ];

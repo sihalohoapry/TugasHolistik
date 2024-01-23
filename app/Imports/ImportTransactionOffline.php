@@ -36,6 +36,7 @@ class ImportTransactionOffline implements ToModel,WithHeadingRow
             'price'=> $row['harga'],
             'disc'=> $row['disc'],
             'netto'=> $row['netto'],
+            'domisili'=>$row['domisili'],
             'tipe_trancation'=>'OFFLINE',
             // 'customer_since'=> Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['customer_since'])),
             // 'billing'=> $row['billing'],

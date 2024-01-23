@@ -10,6 +10,8 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Excel;
+use Maatwebsite\Excel\Excel as ExcelExcel;
+use Maatwebsite\Excel\Facades\Excel as FacadesExcel;
 use SebastianBergmann\Template\Template;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -31,9 +33,9 @@ class UploadDataController extends Controller
                                     Hapus
                     </a>
 
-                    <a class="btn btn-primary" data-toggle="modal" data-target="#ModalEdit" onclick = "setParameterEdit(' .  $item->id . ', `'. $item->name .'` , `'. $item->email .'`)" >
+                    <a class="btn btn-primary" href="' . route('edit-data', $item->id) . '">
                                     Edit
-                    </a>
+                                </a>
 
 
 
@@ -61,10 +63,10 @@ class UploadDataController extends Controller
         $file = $request->file('file');
         $nama_file = $file->getClientOriginalName();
         if($nama_file == 'ExportOnlineStore.xlsx'){
-            Excel::import(new ImportTransaction, $request->file);
+            FacadesExcel::import(new ImportTransaction, $request->file);
         }
         if($nama_file == 'ExportOfflineStore.xlsx'){
-            Excel::import(new ImportTransactionOffline, $request->file);
+            FacadesExcel::import(new ImportTransactionOffline, $request->file);
         }
         return redirect()->back()->with('status', "Berhasil Menambahkan Data");
     }
@@ -73,6 +75,24 @@ class UploadDataController extends Controller
         $data = DataTransactions::findOrFail($request->idData);
         $data->delete();
         return redirect()->route('upload-data')->with('status', 'berhasil menghapus data');
+    }
+
+    public function postData(Request $request){
+        $data = $request->all();
+        DataTransactions::create($data);
+        return redirect()->back()->with('status', "Berhasil Menambahkan Data");
+
+    }
+
+    public function editData($id){
+        $data = DataTransactions::findOrFail($id);
+        return view('edit-data',['data' => $data]);
+    }
+
+    public function updateData(Request $request, $id){
+        $data = DataTransactions::findOrFail($id);
+        $data->update($request->all());
+        return redirect()->route('upload-data')->with('status', 'Berhasil Edit Data');
     }
 
 }

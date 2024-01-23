@@ -5,7 +5,7 @@ use Yajra\DataTables\Facades\DataTables;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -48,7 +48,8 @@ class UserController extends Controller
     public function postUser(Request $request){
         $data['name'] = $request->name;
         $data['email'] = $request->email;
-        $data['password'] = "TGSHLSK01";
+        $data['role'] = $request->role;
+        $data['password'] = Hash::make($request->password);
         User::create($data);
         return redirect()->route('user')->with('status', 'Berhasil menambah user');
     }

@@ -62,7 +62,29 @@ User
                                                             </span>
                                                         @enderror
                                         </div>
-                                                        </div>
+
+                                            <div class="mb-3">
+                                                <label for="exampleInputtext1" class="form-label">Password</label>
+                                                <input id="password" type="password" class="form-control" name="password"  required >
+
+                                            </div>
+
+                                            <div class="form-group">
+                                                        <label for="exampleInputtext1" class="form-label">Sekolah</label>
+                                                        <select class="form-control" name="role" id="role" required>
+                                                                    <option value="">Pilih Role</option>
+                                                                    <option  value="ADMIN">Admin</option>
+                                                                    <option  value="HEAD OF CR">Head Of CR</option>
+                                                                    <option  value="HEAD OF MKT">Head Of MKT</option>
+                                                                    <option  value="CR STAFF">CR Staff</option>
+
+                                                                {{-- @foreach ($sekolah as $item )
+                                                                    <option  value="{{ $item->id }}">{{ $item->nama_sekolah }}</option>
+                                                                @endforeach --}}
+                                                        </select>
+                                                    </div>
+
+                                    </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-warning" data-dismiss="modal">Batal</button>
                                                             <button type="submit" class="btn btn-success">Submit</button>

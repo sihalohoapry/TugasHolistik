@@ -30,6 +30,32 @@ Email
                 @include('alert.success')
                 @include('alert.failed')
 
+                <div class="modal fade" id="ModalSent" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="myModalLabel">Kirim Email</h4>
+                                <button type="button" class="btn btn-close" data-dismiss="modal" >
+                                
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+                                <form action="{{ route('sent-email') }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <input type="hidden" id="idData" name="idData">
+                                <p>Anda yakin kirim email data ini?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                <button type="submit" class="btn btn-success">Ya</button>
+                                </form>
+
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+
                 <div class="modal fade" id="ModalSentAll" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
@@ -43,8 +69,17 @@ Email
 
                                 <form action="{{ route('sent-all') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
-                                    <input type="hidden" id="idTemplate" name="idTemplate">
-                                <p>Anda akan mengirim email sejumlah <span><b id="jumlahData"></b></span></p>
+                                    <div class="form-group">
+                                                        <label for="exampleInputtext1" class="form-label">Kirim email bulk berdasarkan domisili</label>
+                                                        <select class="form-control" name="domisili" id="domisili" required>
+                                                                    
+                                                                <option  value="">Pilih Domisili</option>
+
+                                                                @foreach ($domisili as $item )
+                                                                    <option  value="{{ $item->domisili }}">{{ $item->domisili }}</option>
+                                                                @endforeach
+                                                        </select>
+                                                    </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
@@ -83,9 +118,15 @@ Email
                                         <div class="table-responsive">
                                             <table id="datatable" class="table table-theme table-row v-middle" >
                                                 <thead>
+                                                    
+                                                    <button type="button" data-toggle="modal" data-target="#ModalSentAll" name="bulk_delete" id="bulk_delete" class="btn btn-md btn-primary btn-xs">Sent Email 
+                                                            <i class="ti ti-mail"></i></button>
+
+                                                            {{-- <button type="button" data-toggle="modal" data-target="#ModalSentAll" name="bulk_delete" id="bulk_delete" class="btn btn-md btn-primary btn-xs">Sent Email 
+                                                            <i class="ti ti-mail"></i></button> --}}
+
                                                     <tr>
-                                                        <th width="150px"><button type="button" data-toggle="modal" data-target="#ModalSentAll" name="bulk_delete" id="bulk_delete" class="btn btn-md btn-primary btn-xs">Sent Email 
-                                                            <i class="ti ti-mail"></i></button></th>
+                                                        
                                                         <th><span class="text-muted">Nama</span></th>
                                                         <th><span class="text-muted">Email</span></th>
                                                         <th><span class="text-muted">Created Date</span></th>
@@ -142,8 +183,8 @@ Email
                 url: '{!! url()->current() !!}',
             },
             columns:[
-                {data: 'checkbox', name: 'checkbox', orderable:false, searchable:false},
-                {data:'name', name: 'name'},
+                // {data: 'checkbox', name: 'checkbox', orderable:false, searchable:false},
+                {data:'customer', name: 'customer'},
                 {data:'email', name: 'email'},
                 {data:'created_at', name: 'created_at'},
                 {

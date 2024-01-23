@@ -44,14 +44,14 @@ User
                                                 @csrf
                                                 <div class="form-row">
                                                     <div class="form-group col-md-12 mb-2">
-                                                        <label class="text-muted">Kategori</label>
-                                                        <select style="padding: 5px; width: 100%;" name="category">
-                                                            <option value="">Silahkan Pilih Kategori</option>
-                                                            <option value="Penting">Penting</option>
-                                                            <option value="Internal">Internal</option>
-                                                            <option value="External">External</option>
+                                                        <label for="exampleInputtext1" class="form-label">Subject</label>
+                                                        <input id="subject" type="text" class="form-control @error('subject') is-invalid @enderror" name="subject"  required autocomplete="subject" autofocus>
 
-                                                        </select>
+                                                        @error('subject')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
                                                     </div>
                                                     <div class="form-group col-md-12 mb-2">
                                                         <label class="text-muted">Body</label>
@@ -158,9 +158,17 @@ User
                                         <div class="col-md-6">
 
                                             <div >
+                                                @if ($count == 1)
+                                                    <a style="float: right" data-toggle="modal" data-target="#myModal" class="btn btn-md btn-success disabled">
+                                                    <span class="d-none d-sm-inline mx-1">Tambah Template</span>
+                                                    <i class="ti ti-plus"></i>
+                                                </a>
+                                                @else
+                                                    
                                                 <a style="float: right" data-toggle="modal" data-target="#myModal" class="btn btn-md btn-success">
                                                     <span class="d-none d-sm-inline mx-1">Tambah Template</span>
                                                     <i class="ti ti-plus"></i>
+                                                @endif
                                                 </a>
                                                 
                                             </div>
@@ -175,7 +183,7 @@ User
                                                     <tr>
                                                         <th><span class="text-muted">Template Email</span></th>
                                                         <th><span class="text-muted">Kategori</span></th>
-                                                        <th><span class="text-muted">Nama Attachment</span></th>
+                                                        <th><span class="text-muted">Subject</span></th>
                                                         <th><span class="text-muted">Created Date</span></th>
                                                         <th><span class="text-muted">Aksi</span></th>
                                                         
@@ -237,7 +245,7 @@ User
             },
             columns:[
                 {data:'body', name: 'body'},
-                {data:'category', name: 'category'},
+                {data:'subject', name: 'subject'},
                 {data:'name_attachment', name: 'name_attachment'},
                 {data:'created_at', name: 'created_at'},
                 {

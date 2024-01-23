@@ -37,6 +37,7 @@ class ImportTransaction implements ToModel,WithHeadingRow
             'transaction_date'=>Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['transaction_date'])) ,
             'billing'=> $row['billing'],
             'price'=> $row['harga'],
+            'domisili'=>$row['domisili'],
             'tipe_trancation'=>'ONLINE',
             'netto'=> $row['harga'],
         ]);

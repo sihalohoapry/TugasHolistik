@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('customer')->nullable();
             $table->string('email')->nullable();
+            $table->string('domisili')->nullable();
             $table->string('phone')->nullable();
             $table->date('customer_since')->nullable();
             $table->string('brand')->nullable();
@@ -33,6 +34,11 @@ return new class extends Migration
             $table->decimal('disc')->nullable();
             $table->decimal('netto')->nullable();
             $table->string('tipe_trancation')->nullable();
+
+            $table->date('emailed_date')->nullable();
+            $table->boolean('isEmailed')->nullable();
+
+
 
             $table->softDeletes();
 

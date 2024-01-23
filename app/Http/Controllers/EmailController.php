@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Mail\SentEmail;
+use App\Models\DataTransactions;
+use App\Models\TemplateEmails;
 use App\Models\User;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use SebastianBergmann\Template\Template;
 use Yajra\DataTables\Facades\DataTables;
 
 class EmailController extends Controller
@@ -15,12 +19,8 @@ class EmailController extends Controller
         public function email(){
         if (request()->ajax()) {
             
-            $data = User::where(
-                [
-                    ['role', '=', 'USER'],
-                    ['is_emailed', '=', null]
-                ]
-            );
+            $data = DataTransactions::where('isEmailed', '=', null
+            )->where('email', '!=',null);
             // $data = User::all();
 
 
@@ -33,7 +33,7 @@ class EmailController extends Controller
             ->addColumn('action', function ($item) {
                 return '
 
-                    <a class="btn btn-success" data-toggle="modal" data-target="#ModalDelete" onclick = "setParameter(' .  $item->id . ')" >
+                    <a class="btn btn-success" data-toggle="modal" data-target="#ModalSent" onclick = "setParameter(' .  $item->id . ')" >
                                     Sent
                     </a>
 
@@ -51,35 +51,67 @@ class EmailController extends Controller
             ->rawColumns(['action','body','checkbox'])
             ->make();
         }
-        
-        return view('email');
+
+        $domisili = DB::table('data_transactions')
+                 ->select('domisili')
+                 ->groupBy('domisili')
+                 ->get();
+        return view('email',['domisili'=>$domisili]);
     }
 
 
     public function sentAll(Request $request){
-        $array = array_map('intval', json_decode($request->idTemplate, true));
-        $users = User::whereIn('id', $array)->get();
-        foreach( $users as $user){
+        $data = DataTransactions::where('domisili', '=', $request->domisili)
+            ->where('email', '!=', null)
+            ->where('isEmailed', '=', null)
+            ->get();
 
-            $data = User::findOrFail($user->id);
-                $body = 'Dear Ibu/bapak';
+        $templateEmail = TemplateEmails::first();
+        foreach( $data as $item){
+
+                $body = $templateEmail->body;
                 $dataEmail = [
-                    'subject' => 'Testing Email',
+                    'subject' => $templateEmail->subject,
                     'body' => $body,
 
                 ];
-            Mail::to($user->email)->send(new SentEmail($dataEmail));
+            Mail::to($item->email)->send(new SentEmail($dataEmail));
             if(Mail::flushMacros()){
                 continue;
             } 
             else{
 
-                $data['is_emailed'] = true;
+                $updateData = DataTransactions::findOrFail($item->id);
+                $updateData['isEmailed'] = true;
+                $updateData['emailed_date'] = date('Y-m-d');
+                $updateData->update();
+            }
+            
+        }
+
+        return redirect()->route('email')->with('status', 'Berhasil kirim email');
+
+    }
+
+    public function sentEmail(Request $request){
+        $data = DataTransactions::findOrFail($request->idData);
+        $templateEmail = TemplateEmails::first();
+        $body = $templateEmail->body;
+                $dataEmail = [
+                    'subject' => $templateEmail->subject,
+                    'body' => $body,
+
+                ];
+            Mail::to($data->email)->send(new SentEmail($dataEmail));
+            if(Mail::flushMacros()){
+            } 
+            else{
+
+                $data['isEmailed'] = true;
                 $data['emailed_date'] = date('Y-m-d');
                 $data->update();
             }
             
-        }
 
         return redirect()->route('email')->with('status', 'Berhasil kirim email');
 

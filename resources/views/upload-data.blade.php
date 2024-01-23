@@ -40,23 +40,182 @@ Upload Data
                                   </div>
                                   <div class="modal-body">
                 
-                                        <form action="{{ route('add-user') }}" method="POST" enctype="multipart/form-data">
+                                        <form action="{{ route('add-data') }}" method="POST" enctype="multipart/form-data">
                                             @csrf
                                                 <div class="mb-3">
-                                                    <label for="exampleInputtext1" class="form-label">Name</label>
-                                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name"  required autocomplete="name" autofocus>
+                                                    <label for="exampleInputtext1" class="form-label">Customer</label>
+                                                    <input id="customer" type="text" class="form-control @error('customer') is-invalid @enderror" name="customer"  required autocomplete="customer" autofocus>
 
-                                                    @error('name')
+                                                    @error('customer')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
                                                 </div>
                                                 <div class="mb-3">
+                                                    <label for="exampleInputEmail1" class="form-label">Telephone</label>
+                                                    <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone">
+
+                                                                @error('phone')
+                                                                    <span class="invalid-feedback" role="alert">
+                                                                        <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                                @enderror
+                                                </div>
+                                                <div class="mb-3">
                                                     <label for="exampleInputEmail1" class="form-label">Email Address</label>
                                                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
                                                                 @error('email')
+                                                                    <span class="invalid-feedback" role="alert">
+                                                                        <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                                @enderror
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="exampleInputEmail1" class="form-label">Brand</label>
+                                                    <input id="brand" type="text" class="form-control @error('brand') is-invalid @enderror" name="brand" value="{{ old('brand') }}" required autocomplete="brand">
+
+                                                                @error('brand')
+                                                                    <span class="invalid-feedback" role="alert">
+                                                                        <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                                @enderror
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="exampleInputEmail1" class="form-label">Tanggal Transaksi</label>
+                                                    <input id="transaction_date" type="date" class="form-control @error('transaction_date') is-invalid @enderror" name="transaction_date" value="{{ old('transaction_date') }}" required autocomplete="transaction_date">
+
+                                                                @error('transaction_date')
+                                                                    <span class="invalid-feedback" role="alert">
+                                                                        <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                                @enderror
+                                                </div>
+                                                <div class="form-group mb-3">
+                                                        <label for="exampleInputtext1" class="form-label">Tipe Transaksi</label>
+                                                        <select class="form-control" name="tipe_trancation" id="tipe_trancation" required>
+                                                                    <option value="">Add Tipe Transaksi</option>
+                                                                    <option  value="OFFLINE">Offline</option>
+                                                                    <option  value="ONLINE">Online</option>
+                                                                    
+                                                        </select>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="exampleInputEmail1" class="form-label">Nama Toko</label>
+                                                    <input id="name_store" type="text" class="form-control @error('name_store') is-invalid @enderror" name="name_store" value="{{ old('name_store') }}" required autocomplete="name_store">
+
+                                                                @error('name_store')
+                                                                    <span class="invalid-feedback" role="alert">
+                                                                        <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                                @enderror
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="exampleInputEmail1" class="form-label">Group Produk</label>
+                                                    <input id="name_product" type="text" class="form-control @error('name_product') is-invalid @enderror" name="name_product" value="{{ old('name_product') }}" required autocomplete="name_product">
+
+                                                                @error('name_product')
+                                                                    <span class="invalid-feedback" role="alert">
+                                                                        <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                                @enderror
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="exampleInputEmail1" class="form-label">Product</label>
+                                                    <input id="product" type="text" class="form-control @error('product') is-invalid @enderror" name="product" value="{{ old('product') }}" required autocomplete="product">
+
+                                                                @error('product')
+                                                                    <span class="invalid-feedback" role="alert">
+                                                                        <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                                @enderror
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="exampleInputEmail1" class="form-label">Nama Produk</label>
+                                                    <input id="name_product" type="text" class="form-control @error('name_product') is-invalid @enderror" name="name_product" value="{{ old('name_product') }}" required autocomplete="name_product">
+
+                                                                @error('name_product')
+                                                                    <span class="invalid-feedback" role="alert">
+                                                                        <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                                @enderror
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="exampleInputEmail1" class="form-label">Gender</label>
+                                                    <input id="gender" type="text" class="form-control @error('gender') is-invalid @enderror" name="gender" value="{{ old('gender') }}" required autocomplete="gender">
+
+                                                                @error('gender')
+                                                                    <span class="invalid-feedback" role="alert">
+                                                                        <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                                @enderror
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="exampleInputEmail1" class="form-label">Warna</label>
+                                                    <input id="color" type="text" class="form-control @error('color') is-invalid @enderror" name="color" value="{{ old('color') }}" required autocomplete="color">
+
+                                                                @error('color')
+                                                                    <span class="invalid-feedback" role="alert">
+                                                                        <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                                @enderror
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="exampleInputEmail1" class="form-label">Size</label>
+                                                    <input id="size" type="text" class="form-control @error('size') is-invalid @enderror" name="size" value="{{ old('size') }}" required autocomplete="size">
+
+                                                                @error('size')
+                                                                    <span class="invalid-feedback" role="alert">
+                                                                        <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                                @enderror
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="exampleInputEmail1" class="form-label">Qty</label>
+                                                    <input id="qty" type="text" class="form-control @error('qty') is-invalid @enderror" name="qty" value="{{ old('qty') }}" required autocomplete="qty">
+
+                                                                @error('qty')
+                                                                    <span class="invalid-feedback" role="alert">
+                                                                        <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                                @enderror
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="exampleInputEmail1" class="form-label">Harga</label>
+                                                    <input id="price" type="text" class="form-control @error('price') is-invalid @enderror" name="price" value="{{ old('price') }}" required autocomplete="price">
+
+                                                                @error('price')
+                                                                    <span class="invalid-feedback" role="alert">
+                                                                        <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                                @enderror
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="exampleInputEmail1" class="form-label">Disc</label>
+                                                    <input id="disc" type="text" class="form-control @error('disc') is-invalid @enderror" name="disc" value="{{ old('disc') }}" required autocomplete="disc">
+
+                                                                @error('disc')
+                                                                    <span class="invalid-feedback" role="alert">
+                                                                        <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                                @enderror
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="exampleInputEmail1" class="form-label">Netto</label>
+                                                    <input id="netto" type="text" class="form-control @error('netto') is-invalid @enderror" name="netto" value="{{ old('netto') }}" required autocomplete="netto">
+
+                                                                @error('netto')
+                                                                    <span class="invalid-feedback" role="alert">
+                                                                        <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                                @enderror
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="exampleInputEmail1" class="form-label">Domisili</label>
+                                                    <input id="domisili" type="text" class="form-control @error('domisili') is-invalid @enderror" name="domisili" value="{{ old('domisili') }}" required autocomplete="domisili">
+
+                                                                @error('domisili')
                                                                     <span class="invalid-feedback" role="alert">
                                                                         <strong>{{ $message }}</strong>
                                                                     </span>
@@ -114,44 +273,6 @@ Upload Data
                                     </div>
                                 </div>
                             </div>
-                    </div>
-
-                    <div class="modal fade" id="ModalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h4 class="modal-title" id="myModalLabel">Edit User</h4>
-                                    <button type="button" class="btn btn-close"  data-dismiss="modal">
-                                      {{-- <span aria-hidden="true">&times;</span> --}}
-                                    </button>
-                                  </div>
-                                  <div class="modal-body">
-            
-                                    <form action="{{ route('edit-user') }}" method="POST" enctype="multipart/form-data">
-                                        @csrf
-                                    <input type="hidden" id="id" name="id">
-
-                                        <div class="mb-3">
-                                            <label for="exampleInputtext1" class="form-label">Name</label>
-                                            <input id="name_edit" type="text" class="form-control" name="name_edit"  required >
-
-                                         </div>
-                                        <div class="mb-3">
-                                            <label for="exampleInputEmail1" class="form-label">Email Address</label>
-                                            <input id="email_edit" type="email" class="form-control"  name="email_edit">
-
-                                                        
-                                        </div>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-warning" data-dismiss="modal">Batal</button>
-                                                            <button type="submit" class="btn btn-success">Submit</button>
-                                                            </form>
-                                    
-                                                        </div>
-                                                        </div>
-                                                    </div>
-                                    </form>
                     </div>
 
                     <div class="modal fade" id="ModalDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

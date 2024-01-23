@@ -13,6 +13,7 @@ class TemplateEmails extends Model
 
     protected $fillable = [
         'user_id',
+        'subject',
         'body',
         'category',
         'name_attachment'
